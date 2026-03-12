@@ -7,10 +7,10 @@ import ScoreBoard from './components/ScoreBoard';
 
 function App() {
   const { socket, connectionStatus } = useSocket();
-  const { gameState, myId, hasJoined, gameOver, winner, allPlayers, isDead, joinGame, leaveGame } = useGame(socket);
+  const { gameState, myId, hasJoined, gameOver, winner, allPlayers, isDead, joinGame, leaveGame, predictMove } = useGame(socket);
   const [inputName, setInputName] = useState('');
 
-  useKeyboard(socket, hasJoined);
+  useKeyboard(socket, hasJoined, predictMove);
 
   const handleJoin = (e) => {
     e.preventDefault();

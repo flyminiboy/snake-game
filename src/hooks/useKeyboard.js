@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-function useKeyboard(socket, hasJoined) {
+function useKeyboard(socket, hasJoined, predictMove) {
   useEffect(() => {
     if (!socket || !hasJoined) return;
 
@@ -20,7 +20,7 @@ function useKeyboard(socket, hasJoined) {
 
       if (direction) {
         event.preventDefault();
-        socket.emit('change-direction', direction);
+        predictMove(direction);
       }
     };
 
@@ -29,7 +29,7 @@ function useKeyboard(socket, hasJoined) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [socket, hasJoined]);
+  }, [socket, hasJoined, predictMove]);
 }
 
 export default useKeyboard;
